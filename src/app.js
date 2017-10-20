@@ -1,6 +1,16 @@
 import {createStore} from 'redux';
 
 
+
+//Step 1 create store 
+
+const store = createStore(reducer);
+
+store.subscribe (() => {
+console.log('current state:' , store.getState());
+//console.log('current price:' , store.getState()[1].price);
+})
+
 // Step 3 Define reducers
 const reducer = function (state={books:[]}, action){
 switch(action.type){
@@ -22,19 +32,11 @@ return{books:[...currentBookToDelete.slice(0,indexToDelete),
       ...currentBookToDelete.slice(indexToDelete+1)]}
 
   break;
+
 }
 return state
 
 }
-
-//Step 1 create store 
-
-const store = createStore(reducer);
-
-store.subscribe (() => {
-console.log('current state:' , store.getState());
-//console.log('current price:' , store.getState()[1].price);
-})
 
 // Step 2 Create & dispatch actions 
 
@@ -57,6 +59,8 @@ store.dispatch({
 
 	})
 
+
+ // Delete a book
   store.dispatch({
 	type:"DELETE_BOOK" ,
 	 payload:{
@@ -69,3 +73,4 @@ store.dispatch({
 
 	})
 
+  
